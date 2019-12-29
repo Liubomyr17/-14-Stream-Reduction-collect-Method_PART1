@@ -1,0 +1,27 @@
+package com.example.demo;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamReductionCollectTest {
+
+    public static void main(String[] args) {
+
+    List<Product> productList = Arrays.asList(new Product(23, "potatoes"),
+            new Product(14, "orange"), new Product(13, "lemon"),
+            new Product(23, "bread"), new Product(13, "sugar"));
+
+    List<String> collect = productList.stream().map(Product::getName).collect(Collectors.toList());
+    collect.forEach(System.out::println);
+    // Converting stream to collection
+    System.out.println("------------------------------------------");
+    // Reduce to String
+        String collect2 = productList.stream().map(Product::getName).collect(Collectors.joining(",", "[", "]"));
+        System.out.println(collect2);
+        System.out.println("------------------------------------------");
+        // Average price
+        Double averagePrice = productList.stream().collect(Collectors.averagingInt(Product::getPrice));
+        System.out.println(averagePrice);
+    }
+}
